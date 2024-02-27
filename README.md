@@ -11,7 +11,7 @@ This repository contains code for object detection and tracking in videos using 
 1. Clone this repository:
   ```
    git clone https://github.com/sujanshresstha/YOLOv9_DeepSORT.git
-   cd YOLO-NAS_DeepSORT
+   cd YOLOv9_DeepSORT
   ```
 
 2. Create new environment
