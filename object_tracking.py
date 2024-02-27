@@ -11,7 +11,7 @@ flags.DEFINE_string('video', './data/test.mp4', 'path to input video')
 flags.DEFINE_string('output', './output/output.mp4', 'path to output video')
 flags.DEFINE_float('conf', 0.50, 'confidence threshold')
 flags.DEFINE_integer('blur_id', None, 'class ID to apply Gaussian Blur')
-flags.DEFINE_integer('class_id', None, 'class ID to blur')
+flags.DEFINE_integer('class_id', None, 'class ID to track')
 
 def main(_argv):
   # Initialize the video capture
@@ -33,7 +33,7 @@ def main(_argv):
   model = AutoShape(model)
 
   # Load the COCO class labels
-  classes_path = "./configs/coco.names"
+  classes_path = "../configs/coco.names"
   with open(classes_path, "r") as f:
       class_names = f.read().strip().split("\n")
 
@@ -85,7 +85,6 @@ def main(_argv):
               if 0 <= x1 < x2 <= frame.shape[1] and 0 <= y1 < y2 <= frame.shape[0]:
                   frame[y1:y2, x1:x2] = cv2.GaussianBlur(frame[y1:y2, x1:x2], (99, 99), 3)
 
-
       cv2.imshow('YOLOv9 Object tracking', frame)
       writer.write(frame)
       if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -100,11 +99,3 @@ if __name__ == '__main__':
       app.run(main)
   except SystemExit:
       pass
-
-
-
-
-
-
-
-
