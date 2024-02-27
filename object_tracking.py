@@ -7,7 +7,7 @@ from deep_sort_realtime.deepsort_tracker import DeepSort
 from models.common import DetectMultiBackend, AutoShape
 
 # Define command line flags
-flags.DEFINE_string('video', './data/test.mp4', 'path to input video')
+flags.DEFINE_string('video', './data/test.mp4', 'Path to input video or webcam index (0)')
 flags.DEFINE_string('output', './output/output.mp4', 'path to output video')
 flags.DEFINE_float('conf', 0.50, 'confidence threshold')
 flags.DEFINE_integer('blur_id', None, 'class ID to apply Gaussian Blur')
@@ -15,7 +15,16 @@ flags.DEFINE_integer('class_id', None, 'class ID to track')
 
 def main(_argv):
   # Initialize the video capture
-  cap = cv2.VideoCapture(FLAGS.video)
+  video_input = FLAGS.video
+  # Check if the video input is an integer (webcam index)
+  if FLAGS.video.isdigit():
+      video_input = int(video_input)
+      cap = cv2.VideoCapture(video_input)
+  else:
+      cap = cv2.VideoCapture(video_input)
+  if not cap.isOpened():
+      print('Error: Unable to open video source.')
+      return
   frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
   frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
   fps = int(cap.get(cv2.CAP_PROP_FPS))
