@@ -1,0 +1,5 @@
+torch
+utils
+imutils
+Pillow
+deep-sort-realtime
