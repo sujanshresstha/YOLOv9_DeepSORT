@@ -58,16 +58,16 @@ This repository contains code for object detection and tracking in videos using 
 7. Run the code:
    ```
    # Run object tracking
-   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --model yolo_nas_l
+   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4
 
    # Run object tracking on webcam (set video flag to 0)
-   python object_tracking.py --video 0 --output ./output/webcam.mp4 --model yolo_nas_l
+   python object_tracking.py --video 0 --output ./output/webcam.mp4
 
    # Run person tracking (set class_id flag to 0 for person)
-   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --model yolo_nas_l --class_id 0
+   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --class_id 0
    
    # Run tracking on a video with burring certain objects (set blur_id flag to 0 for person)
-   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --model yolo_nas_l --blur_id 0
+   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --blur_id 0
    ```
    
 
