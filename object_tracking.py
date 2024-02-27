@@ -29,11 +29,11 @@ def main(_argv):
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
   # Load YOLO model
-  model = DetectMultiBackend(weights='./weights/yolov9-e.pt',device=device, data='configs/coco.yaml', fuse=True)
+  model = DetectMultiBackend(weights='./weights/yolov9-e.pt',device=device, fuse=True)
   model = AutoShape(model)
 
   # Load the COCO class labels
-  classes_path = "C:/Users/T.Tetsuo/Documents/code/pythonProject/yolov9/coco.names"
+  classes_path = "./configs/coco.names"
   with open(classes_path, "r") as f:
       class_names = f.read().strip().split("\n")
 
