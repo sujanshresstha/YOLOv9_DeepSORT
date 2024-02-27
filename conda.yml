@@ -1,10 +1,11 @@
-name: yolonas-deepsort
+name: yolov9-deepsort
 
 dependencies:
   - python==3.11
   
   - pip:
     - torch
+    - utils
     - imutils
     - Pillow
     - deep-sort-realtime
