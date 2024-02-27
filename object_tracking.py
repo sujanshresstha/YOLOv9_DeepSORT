@@ -47,7 +47,7 @@ def main(_argv):
           break
       # Run model on each frame
       results = model(frame)
-      results = []
+      detect = []
       for det in results.pred[0]:
           label, confidence, bbox = det[5], det[4], det[:4]
           x1, y1, x2, y2 = map(int, bbox)
@@ -61,9 +61,9 @@ def main(_argv):
               if class_id != FLAGS.class_id or confidence < FLAGS.conf:
                   continue
 
-          results.append([[x1, y1, x2 - x1, y2 - y1], confidence, class_id])
+          detect.append([[x1, y1, x2 - x1, y2 - y1], confidence, class_id])
 
-      tracks = tracker.update_tracks(results, frame=frame)
+      tracks = tracker.update_tracks(detect, frame=frame)
 
       for track in tracks:
           if not track.is_confirmed():
