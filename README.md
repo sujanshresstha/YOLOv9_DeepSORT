@@ -14,16 +14,30 @@ This repository contains code for object detection and tracking in videos using 
    cd YOLO-NAS_DeepSORT
   ```
 
-2. Create new environment using conda
+2. Create new environment
+  - Using Conda
   ```
   conda env create -f conda.yml
-  conda activate yolonas-deepsort
+  conda activate yolov9-deepsort
+  ```
+  - Using pip
+  ```
+  python3 -m virtualenv -p python3.11 yolov9-deepsort
+  source yolov9-deepsort/bin/activate
+  pip install -r requirements.txt
   ```
 
 3. Clone YOLOv9 repository:
   ```
    git clone https://github.com/WongKinYiu/yolov9.git
+   cd yolov9
    pip install -r requirements.txt
+   mv ../object_tracking.py ../yolov9
+  ```
+4. Download model weight
+  ```
+   mkdir weights
+   wget -P weights https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-e.pt
   ```
 
 ## Usage
@@ -31,8 +45,7 @@ This repository contains code for object detection and tracking in videos using 
    - Place the video file in the desired location.
    - Update the `video` flag in the path of the video file or set it to `0` to use the webcam as the input.
 2. Download YOLOv9 model:
-   - Clone the `model` from YOLOv9. 
-   - Make sure the corresponding model weights are available.
+   - Make sure the corresponding model weights are available.(YOLOv9-S/YOLOv9-M/[YOLOv9-C](https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-c.pt)/[YOLOv9-E](https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-e.pt))
 3. Configure the output video:
    - Update `output` flag in the code to specify the path and filename of the output video file.
 4. Set the confidence threshold:
@@ -45,16 +58,16 @@ This repository contains code for object detection and tracking in videos using 
 7. Run the code:
    ```
    # Run object tracking
-   python object_tracking.py --video ./data/video/test.mp4 --output ./output/output.mp4 --model yolo_nas_l
+   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --model yolo_nas_l
 
    # Run object tracking on webcam (set video flag to 0)
    python object_tracking.py --video 0 --output ./output/webcam.mp4 --model yolo_nas_l
 
    # Run person tracking (set class_id flag to 0 for person)
-   python object_tracking.py --video ./data/video/test.mp4 --output ./output/output.mp4 --model yolo_nas_l --class_id 0
+   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --model yolo_nas_l --class_id 0
    
    # Run tracking on a video with burring certain objects (set blur_id flag to 0 for person)
-   python object_tracking.py --video ./data/video/test.mp4 --output ./output/output.mp4 --model yolo_nas_l --blur_id 0
+   python object_tracking.py --video ./data/test.mp4 --output ./output/output.mp4 --model yolo_nas_l --blur_id 0
    ```
    
 
